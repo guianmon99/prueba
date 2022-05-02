@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 02.05.2022 14:35:17
+-- Create Date: 02.05.2022 14:53:05
 -- Design Name: 
--- Module Name: ffd - Behavioral
+-- Module Name: muxcase - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,27 +31,32 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ffd is
-    Port ( clk,rst,din : in STD_LOGIC;
-           dout : out STD_LOGIC);
-end ffd;
+entity muxcase is
+    Port ( a,b,c,d : in STD_LOGIC;
+           sel : in STD_LOGIC_VECTOR (1 downto 0);
+           y : out STD_LOGIC);
+end muxcase;
 
-architecture Behavioral of ffd is
+architecture Behavioral of muxcase is
+
 begin
-process(clk)
-begin
-    if(rising_edge(clk))then -- falling_edge(clk)
-        if(rst='1') then 
-            dout<='0';
-            
-         else 
-            dout<= din;
-         end if; 
-end if;
-end process;
+process(a,b,c,d,sel)
+begin 
+ case (sel) is 
+  when "00"=> 
+    y<=a;
+  when "01" => 
+   y<=b;
+   
+  when "10" =>
+  
+  y<=c; 
+  
+  when "11" =>
+  
+  y<=d;
+ end case;
 
-
-
-
+end process; 
 
 end Behavioral;

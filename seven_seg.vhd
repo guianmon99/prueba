@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 02.05.2022 14:35:17
+-- Create Date: 02.05.2022 16:13:29
 -- Design Name: 
--- Module Name: ffd - Behavioral
+-- Module Name: seven_seg - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,27 +31,46 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ffd is
-    Port ( clk,rst,din : in STD_LOGIC;
-           dout : out STD_LOGIC);
-end ffd;
+entity seven_seg is
+    Port ( b : in STD_LOGIC_VECTOR (2 downto 0);
+           anode : out STD_LOGIC_VECTOR (3 downto 0);
+           catode : out STD_LOGIC_VECTOR (7 downto 0));
+end seven_seg;
 
-architecture Behavioral of ffd is
+architecture Behavioral of seven_seg is
+
 begin
-process(clk)
+anode<="0111";
+process(b)
 begin
-    if(rising_edge(clk))then -- falling_edge(clk)
-        if(rst='1') then 
-            dout<='0';
-            
-         else 
-            dout<= din;
-         end if; 
-end if;
+case(b) is 
+when "000"=>
+catode<=x"03";
+
+when "001"=>
+catode<=x"9f";
+
+when "010"=>
+catode<=x"25";
+
+when "011"=>
+catode<=x"0d";
+
+when "100"=>
+catode<=x"99";
+
+when "101"=>
+catode<=x"49";
+
+when "110"=>
+catode<=x"c1";
+
+when "111"=>
+catode<=x"1f";
+
+when others =>
+catode<= x"ff";
+end case; 
 end process;
-
-
-
-
 
 end Behavioral;
